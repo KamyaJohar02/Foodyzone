@@ -2,7 +2,7 @@ import styled from "styled-components";
 import PropTypes from 'prop-types'
 
 
-const TopSection = ({ searchFood }) => {
+const TopSection = ({ searchFood, filterFood} ) => {
 
   
 
@@ -21,10 +21,10 @@ const TopSection = ({ searchFood }) => {
      </div>
     </TopContainer>
     <FilterContainer>
-     <Button>All</Button>
-     <Button>Breakfast</Button>
-     <Button>Lunch</Button>
-     <Button>Dinner</Button>
+     <Button  onClick={() => filterFood("all")}>All</Button>
+     <Button onClick={()=>filterFood("Breakfast")}>Breakfast</Button>
+     <Button onClick={()=>filterFood("Lunch")}>Lunch</Button>
+     <Button onClick={()=>filterFood("Dinner")}>Dinner</Button>
      
 
     </FilterContainer>
@@ -34,7 +34,8 @@ const TopSection = ({ searchFood }) => {
 
 
 TopSection.propTypes = {
-  searchFood: PropTypes.func.isRequired, // Validate the searchFood prop as a function
+  searchFood: PropTypes.func.isRequired,
+  filterFood:PropTypes.func.isRequired, // Validate the searchFood prop as a function
 };
 
 export default TopSection
@@ -68,6 +69,11 @@ padding: 0 10px;
 
     }
  }
+@media (0 < width < 600px){
+flex-direction:column;
+height:80px;
+}
+  
 
 
 `;

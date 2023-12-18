@@ -10,6 +10,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const[filteredData, setFilteredData]= useState(null);  
+  const[selectedBtn, setSelectedBtn] = useState("all");
  
   const searchFood = (e) => {
     const searchValue = e.target.value.toLowerCase();
@@ -24,6 +25,25 @@ function App() {
       // Update filteredData state with the filtered items
       setFilteredData(filteredItems);
     }
+  };
+  
+  const filterFood = (type) => {
+    // If type is "all", set filteredData to the entire data
+    if (type === "all") {
+      setFilteredData(data);
+      console.log(selectedBtn);
+      setSelectedBtn("all");
+      return; // Exit the function early
+    }
+  
+    // Filter the data based on the selected type
+    const filteredItems = data.filter(
+      (food) => food.type.toLowerCase().includes(type.toLowerCase())
+    );
+  
+    // Update filteredData state with the filtered items
+    setFilteredData(filteredItems);
+    setSelectedBtn(type);
   };
   
 
@@ -59,7 +79,7 @@ function App() {
   return (
     <>
       <div>
-        <TopSection  searchFood={searchFood}/>
+        <TopSection  searchFood={searchFood} filterFood={filterFood}/>
         {/* Pass 'data' to the FoodCards component */}
         <FoodCards data={filteredData} />
       </div>
